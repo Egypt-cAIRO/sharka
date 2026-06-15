@@ -112,7 +112,7 @@ const printDocument = (elementId, title = "وثيقة") => {
     const itemRows = (dn.items||[]).map((it, i) => `
       <tr>
         <td style="text-align:center">${i+1}</td>
-        <td>${it.productName||'بليطة'}</td>
+        <td>${it.productName||'بالته'}</td>
         <td>${getPT(it.palletTypeId).name||'—'}</td>
         <td style="text-align:center;font-weight:700;font-size:15px">${it.qty}</td>
         <td>${it.notes||'—'}</td>
@@ -366,7 +366,7 @@ const initialData = {
       id:"QUO-001", clientId:"CLT-003", date:"2026-06-12", validDays:30,
       notes:"سعر صالح لمدة شهر من تاريخه",
       items:[
-        { palletTypeId:"PT-001", productName:"بليطة", spec:"يورو 120×80 — صنوبر", qty:300, unitPrice:48 },
+        { palletTypeId:"PT-001", productName:"بالته", spec:"يورو 120×80 — صنوبر", qty:300, unitPrice:48 },
       ],
       status:"مرسل",
     },
@@ -375,7 +375,7 @@ const initialData = {
   // أذونات تسليم
   deliveryNotes: [
     { id:"DEL-001", orderId:"ORD-002", clientId:"CLT-002", date:"2026-06-09",
-      items:[{ palletTypeId:"PT-002", productName:"بليطة", qty:150, notes:"" }],
+      items:[{ palletTypeId:"PT-002", productName:"بالته", qty:150, notes:"" }],
       driverName:"حسن محمود", vehicleId:"VEH-002", plateNumber:"د ه و 5678",
       receiverName:"سامي يوسف", receiverSignature:"تم التوقيع", notes:"تسليم كامل", status:"مسلم" },
   ],
@@ -398,7 +398,7 @@ const initialData = {
 
   palletTypes: [
     {
-      id:"PT-001", name:"يورو 120×80", productName:"بليطة", woodType:"صنوبر",
+      id:"PT-001", name:"يورو 120×80", productName:"بالته", woodType:"صنوبر",
       pieces:[
         { label:"ألواح سطح علوي", length:120,  width:14.5, thickness:2.2, count:5 },
         { label:"ألواح سطح سفلي", length:80,   width:14.5, thickness:2.2, count:3 },
@@ -409,7 +409,7 @@ const initialData = {
       kwhPerPallet:0.8, kwhPrice:1.5, overheadPerPallet:3, transportPerPallet:2, fumigationPerPallet:1.5,
     },
     {
-      id:"PT-002", name:"أمريكي 120×100", productName:"بليطة", woodType:"أكاسيا",
+      id:"PT-002", name:"أمريكي 120×100", productName:"بالته", woodType:"أكاسيا",
       pieces:[
         { label:"ألواح سطح علوي", length:120,  width:14.5, thickness:2.2, count:6 },
         { label:"ألواح سطح سفلي", length:100,  width:14.5, thickness:2.2, count:4 },
@@ -420,7 +420,7 @@ const initialData = {
       kwhPerPallet:1.0, kwhPrice:1.5, overheadPerPallet:3, transportPerPallet:2.5, fumigationPerPallet:2,
     },
     {
-      id:"PT-003", name:"نصف يورو 80×60", productName:"بليطة", woodType:"صنوبر",
+      id:"PT-003", name:"نصف يورو 80×60", productName:"بالته", woodType:"صنوبر",
       pieces:[
         { label:"ألواح سطح علوي", length:80,   width:14.5, thickness:2.2, count:4 },
         { label:"ألواح سطح سفلي", length:60,   width:14.5, thickness:2.2, count:3 },
@@ -485,8 +485,8 @@ const initialData = {
   // حركات مقاسات الخشب
   woodSizeTransactions: [
     { id:"WSTX-001", sizeId:"WSZ-001", type:"شراء", meters:5000, date:"2026-05-01", ref:"رصيد افتتاحي", notes:"" },
-    { id:"WSTX-002", sizeId:"WSZ-001", type:"صرف",  meters:750,  date:"2026-06-08", ref:"ORD-002", notes:"إنتاج 150 بليطة أمريكي" },
-    { id:"WSTX-003", sizeId:"WSZ-001", type:"صرف",  meters:500,  date:"2026-06-13", ref:"ORD-001", notes:"إنتاج 120 بليطة يورو" },
+    { id:"WSTX-002", sizeId:"WSZ-001", type:"صرف",  meters:750,  date:"2026-06-08", ref:"ORD-002", notes:"إنتاج 150 بالته أمريكي" },
+    { id:"WSTX-003", sizeId:"WSZ-001", type:"صرف",  meters:500,  date:"2026-06-13", ref:"ORD-001", notes:"إنتاج 120 بالته يورو" },
     { id:"WSTX-004", sizeId:"WSZ-002", type:"شراء", meters:2000, date:"2026-05-01", ref:"رصيد افتتاحي", notes:"" },
     { id:"WSTX-005", sizeId:"WSZ-002", type:"صرف",  meters:450,  date:"2026-06-08", ref:"ORD-002", notes:"" },
     { id:"WSTX-006", sizeId:"WSZ-003", type:"شراء", meters:1500, date:"2026-05-10", ref:"فاتورة مورد", notes:"" },
@@ -741,9 +741,9 @@ function AccountStatement({ data }) {
                 , React.createElement('table', { style: S.tbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 514}}
                   , React.createElement('thead', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 515}}, React.createElement('tr', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 515}}
                     , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 516}}, "رقم الطلبية" )
-                    , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 517}}, "نوع البليطة" )
+                    , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 517}}, "نوع البالته" )
                     , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 518}}, "مواصفة")
-                    , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 519}}, "م³/بليطة")
+                    , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 519}}, "م³/بالته")
                     , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 520}}, "الكمية")
                     , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 521}}, "تكلفة/و")
                     , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 522}}, "سعر بيع/و" )
@@ -822,7 +822,7 @@ function AccountStatement({ data }) {
                         , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 595}}
                           , React.createElement('span', { style: {fontWeight:700,fontSize:14}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 596}}, pt.name)
                           , React.createElement('span', { style: {...S.bdg(isSpec?P.accent:P.muted),marginRight:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 597}}, isSpec?"مخصصة":"قياسية")
-                          , React.createElement('span', { style: {fontSize:12,color:P.muted}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 598}}, pt.woodType, " · "  , fmtD(calcM3(pieces)), " م³/بليطة" )
+                          , React.createElement('span', { style: {fontSize:12,color:P.muted}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 598}}, pt.woodType, " · "  , fmtD(calcM3(pieces)), " م³/بالته" )
                         )
                         , React.createElement(CostBar, { cost: cost, __self: this, __source: {fileName: _jsxFileName, lineNumber: 600}})
                       )
@@ -986,7 +986,7 @@ function ClientSpecsPage({ data, setData }) {
               , (data.clients||[]).map(c=>React.createElement('option', { key: c.id, value: c.id, __self: this, __source: {fileName: _jsxFileName, lineNumber: 759}}, c.company))
             )
           )
-          , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 762}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 762}}, "نوع البليطة" )
+          , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 762}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 762}}, "نوع البالته" )
             , React.createElement('select', { style: S.sel, value: ptId, onChange: e=>{setPtId(e.target.value);setEditMode(false);}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 763}}
               , (data.palletTypes||[]).map(pt=>React.createElement('option', { key: pt.id, value: pt.id, __self: this, __source: {fileName: _jsxFileName, lineNumber: 764}}, pt.name))
             )
@@ -1016,7 +1016,7 @@ function ClientSpecsPage({ data, setData }) {
             React.createElement(React.Fragment, null
               , React.createElement(PieceTable, { pieces: pieces, woodCostPerM3: wCost, __self: this, __source: {fileName: _jsxFileName, lineNumber: 790}})
               , cost&&React.createElement(CostBar, { cost: cost, __self: this, __source: {fileName: _jsxFileName, lineNumber: 791}})
-              , spec&&React.createElement('div', { style: {marginTop:10,fontSize:11,color:P.muted}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 792}}, "سعر م³: "  , fmt(wCost), " ج · نقل: "    , fmtC(tCost), " ج/بليطة · "   , spec.notes||"")
+              , spec&&React.createElement('div', { style: {marginTop:10,fontSize:11,color:P.muted}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 792}}, "سعر م³: "  , fmt(wCost), " ج · نقل: "    , fmtC(tCost), " ج/بالته · "   , spec.notes||"")
             )
           ):(
             React.createElement(SpecEditor, { key: clientId+'_'+ptId, init: {pieces,woodCostPerM3:wCost,transportPerPallet:tCost,fumigationPerPallet:_nullishCoalesce(_nullishCoalesce(_optionalChain([spec, 'optionalAccess', _41 => _41.fumigationPerPallet]), () => (_optionalChain([pt, 'optionalAccess', _42 => _42.fumigationPerPallet]))), () => (0)),notes:_optionalChain([spec, 'optionalAccess', _43 => _43.notes])||""}, onSave: saveSpec, onCancel: ()=>setEditMode(false), __self: this, __source: {fileName: _jsxFileName, lineNumber: 795}})
@@ -1050,8 +1050,8 @@ function ClientSpecsPage({ data, setData }) {
           , React.createElement('div', { style: S.cT, __self: this, __source: {fileName: _jsxFileName, lineNumber: 823}}, "📋 مواصفات جميع العملاء × جميع الأنواع"      )
           , React.createElement('table', { style: S.tbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 824}}
             , React.createElement('thead', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 825}}, React.createElement('tr', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 825}}
-              , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 826}}, "العميل"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 826}}, "نوع البليطة" ), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 826}}, "مواصفة")
-              , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 827}}, "م³/بليطة"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 827}}, "سعر م³" )
+              , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 826}}, "العميل"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 826}}, "نوع البالته" ), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 826}}, "مواصفة")
+              , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 827}}, "م³/بالته"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 827}}, "سعر م³" )
               , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 828}}, "خشب"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 828}}, "عمالة"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 828}}, "كهرباء"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 828}}, "نقل"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 828}}, "إضافي")
               , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 829}}, "إجمالي التكلفة" ), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 829}}, "ملاحظات")
             ))
@@ -1324,7 +1324,7 @@ function ClientCard({ client, data, setData, mode, isExpanded, onToggle, onEdit,
                     , React.createElement('div', { style: { display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:isEditing?14:8 }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1090}}
                       , React.createElement('div', { style: { display:"flex", gap:10, alignItems:"center" }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1091}}
                         , React.createElement('span', { style: { fontWeight:700, fontSize:13 }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1092}}, pt.name)
-                        , React.createElement('span', { style: S.bdg(P.teal), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1093}}, pt.productName||"بليطة")
+                        , React.createElement('span', { style: S.bdg(P.teal), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1093}}, pt.productName||"بالته")
                         , sp.notes && React.createElement('span', { style: { fontSize:11, color:P.muted }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1094}}, "· " , sp.notes)
                       )
                       , React.createElement('div', { style: { display:"flex", gap:6, alignItems:"center" }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1096}}
@@ -1375,7 +1375,7 @@ function ClientCard({ client, data, setData, mode, isExpanded, onToggle, onEdit,
               , React.createElement('select', { style: {...S.sel, flex:1}, value: specPtId, onChange: e=>setSpecPtId(e.target.value), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1141}}
                 , (data.palletTypes||[]).map(pt => (
                   React.createElement('option', { key: pt.id, value: pt.id, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1143}}
-                    , pt.productName||"بليطة", " — "  , pt.name
+                    , pt.productName||"بالته", " — "  , pt.name
                     , clientSpecs[pt.id] ? " ✓ (مضافة)" : ""
                   )
                 ))
@@ -1487,7 +1487,7 @@ function InlineSpecEditor({ form, setForm, pt, onSave, onCancel }) {
 // PALLET TYPES
 // =====================================================================
 function PalletTypesPage({ data, setData }) {
-  const ef={name:"",productName:"بليطة",woodType:"صنوبر",nailsKg:"0.35",woodCostPerM3:"2800",nailCostPerKg:"15",
+  const ef={name:"",productName:"بالته",woodType:"صنوبر",nailsKg:"0.35",woodCostPerM3:"2800",nailCostPerKg:"15",
     workersPerDay:"6",dailyWagePerWorker:"150",dailyOutput:"120",
     kwhPerPallet:"0.8",kwhPrice:"1.5",overheadPerPallet:"3",transportPerPallet:"2",fumigationPerPallet:"0",
     pieces:[{label:"ألواح سطح علوي",length:"120",width:"14.5",thickness:"2.2",count:"5"}]};
@@ -1556,7 +1556,7 @@ function PalletTypesPage({ data, setData }) {
   const draftCost = draftCfg ? calcCost(draftCfg.pieces, draftCfg) : cost;
 
   const [profitMargin, setProfitMargin] = useState("20"); // هامش ربح %
-  const pname = _optionalChain([selPT, 'optionalAccess', _85 => _85.productName]) || "بليطة";
+  const pname = _optionalChain([selPT, 'optionalAccess', _85 => _85.productName]) || "بالته";
 
   return (
     React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1328}}
@@ -1573,7 +1573,7 @@ function PalletTypesPage({ data, setData }) {
           , React.createElement('div', { style: {fontSize:16,fontWeight:700,color:P.accent}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1339}}, "🧮 حاسبة التكلفة والتسعير"   )
           , React.createElement('div', { style: {display:"flex",gap:8,alignItems:"center"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1340}}
             , React.createElement('select', { style: {...S.sel,width:240}, value: sel||"", onChange: e=>{setSel(e.target.value);setEditCost(false);setCostDraft(null);}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1341}}
-              , (data.palletTypes||[]).map(pt=>React.createElement('option', { key: pt.id, value: pt.id, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1342}}, pt.productName||"بليطة", " — "  , pt.name))
+              , (data.palletTypes||[]).map(pt=>React.createElement('option', { key: pt.id, value: pt.id, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1342}}, pt.productName||"بالته", " — "  , pt.name))
             )
             , selPT && !editCost && React.createElement('button', { style: {...S.btn(),fontSize:11,padding:"5px 12px"}, onClick: startCostEdit, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1344}}, "✏️ تعديل" )
             , editCost && React.createElement(React.Fragment, null
@@ -1848,7 +1848,7 @@ function PalletTypesPage({ data, setData }) {
           , React.createElement('div', { style: S.cT, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1614}}, "📋 جميع المنتجات"  )
           , (data.palletTypes||[]).map(pt=>{
             const c=calcCost(pt.pieces,pt);
-            const pname=pt.productName||"بليطة";
+            const pname=pt.productName||"بالته";
             return (
               React.createElement('div', { key: pt.id, onClick: ()=>setSel(pt.id),
                 style: {...S.box(sel===pt.id?P.accent:P.border),cursor:"pointer",marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1619}}
@@ -1884,13 +1884,13 @@ function PalletTypesPage({ data, setData }) {
         React.createElement('div', { style: S.card, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1650}}
           , React.createElement('div', { style: S.cT, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1651}}, "إضافة منتج جديد"  )
           , React.createElement('div', { style: {...S.fg2,marginBottom:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1652}}
-            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1653}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1653}}, "اسم المنتج (الوحدة) — مثال: بليطة، صندوق، رف"       )
-              , React.createElement('input', { style: S.inp, value: form.productName, onChange: e=>setForm(f=>({...f,productName:e.target.value})), placeholder: "بليطة", __self: this, __source: {fileName: _jsxFileName, lineNumber: 1654}})
+            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1653}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1653}}, "اسم المنتج (الوحدة) — مثال: بالته، صندوق، رف"       )
+              , React.createElement('input', { style: S.inp, value: form.productName, onChange: e=>setForm(f=>({...f,productName:e.target.value})), placeholder: "بالته", __self: this, __source: {fileName: _jsxFileName, lineNumber: 1654}})
             )
             , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1656}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1656}}, "اسم النوع / المواصفة"   ), React.createElement('input', { style: S.inp, value: form.name, onChange: e=>setForm(f=>({...f,name:e.target.value})), placeholder: "يورو 120×80" , __self: this, __source: {fileName: _jsxFileName, lineNumber: 1656}}))
             , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1657}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1657}}, "نوع الخشب" ), React.createElement('input', { style: S.inp, value: form.woodType, onChange: e=>setForm(f=>({...f,woodType:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1657}}))
             , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1658}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1658}}, "سعر م³ (ج)"  ), React.createElement('input', { style: S.inp, type: "number", value: form.woodCostPerM3, onChange: e=>setForm(f=>({...f,woodCostPerM3:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1658}}))
-            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1659}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1659}}, "مسامير كجم/" , form.productName||"بليطة"), React.createElement('input', { style: S.inp, type: "number", value: form.nailsKg, onChange: e=>setForm(f=>({...f,nailsKg:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1659}}))
+            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1659}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1659}}, "مسامير كجم/" , form.productName||"بالته"), React.createElement('input', { style: S.inp, type: "number", value: form.nailsKg, onChange: e=>setForm(f=>({...f,nailsKg:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1659}}))
             , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1660}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1660}}, "سعر كجم مسامير"  ), React.createElement('input', { style: S.inp, type: "number", value: form.nailCostPerKg, onChange: e=>setForm(f=>({...f,nailCostPerKg:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1660}}))
           )
           , React.createElement('div', { style: {...S.box(P.blue+"44"),marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1662}}
@@ -1898,21 +1898,21 @@ function PalletTypesPage({ data, setData }) {
             , React.createElement('div', { style: S.fg3, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1664}}
               , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1665}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1665}}, "عدد العمال" ), React.createElement('input', { style: S.inp, type: "number", value: form.workersPerDay, onChange: e=>setForm(f=>({...f,workersPerDay:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1665}}))
               , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1666}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1666}}, "أجر/يوم (ج)" ), React.createElement('input', { style: S.inp, type: "number", value: form.dailyWagePerWorker, onChange: e=>setForm(f=>({...f,dailyWagePerWorker:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1666}}))
-              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1667}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1667}}, "إنتاج/يوم (" , form.productName||"بليطة", ")"), React.createElement('input', { style: S.inp, type: "number", value: form.dailyOutput, onChange: e=>setForm(f=>({...f,dailyOutput:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1667}}))
+              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1667}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1667}}, "إنتاج/يوم (" , form.productName||"بالته", ")"), React.createElement('input', { style: S.inp, type: "number", value: form.dailyOutput, onChange: e=>setForm(f=>({...f,dailyOutput:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1667}}))
             )
           )
           , React.createElement('div', { style: {...S.box(P.purple+"44"),marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1670}}
             , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:P.purple,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1671}}, "⚡ كهرباء وتشغيل"  )
             , React.createElement('div', { style: S.fg3, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1672}}
-              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1673}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1673}}, "كيلوواط/بليطة"), React.createElement('input', { style: S.inp, type: "number", value: form.kwhPerPallet, onChange: e=>setForm(f=>({...f,kwhPerPallet:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1673}}))
+              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1673}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1673}}, "كيلوواط/بالته"), React.createElement('input', { style: S.inp, type: "number", value: form.kwhPerPallet, onChange: e=>setForm(f=>({...f,kwhPerPallet:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1673}}))
               , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1674}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1674}}, "سعر الكيلوواط (ج)"  ), React.createElement('input', { style: S.inp, type: "number", value: form.kwhPrice, onChange: e=>setForm(f=>({...f,kwhPrice:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1674}}))
-              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1675}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1675}}, "تكاليف إضافية/بليطة (ج)"  ), React.createElement('input', { style: S.inp, type: "number", value: form.overheadPerPallet, onChange: e=>setForm(f=>({...f,overheadPerPallet:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1675}}))
+              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1675}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1675}}, "تكاليف إضافية/بالته (ج)"  ), React.createElement('input', { style: S.inp, type: "number", value: form.overheadPerPallet, onChange: e=>setForm(f=>({...f,overheadPerPallet:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1675}}))
             )
           )
           , React.createElement('div', { style: {...S.box(P.teal+"44"),marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1678}}
             , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:P.teal,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1679}}, "🚚 تكلفة النقل"  )
             , React.createElement('div', { style: {maxWidth:300}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1680}}
-              , React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1681}}, "تكلفة النقل / "   , form.productName||"بليطة", " (ج)" )
+              , React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1681}}, "تكلفة النقل / "   , form.productName||"بالته", " (ج)" )
               , React.createElement('input', { style: S.inp, type: "number", value: form.transportPerPallet, onChange: e=>setForm(f=>({...f,transportPerPallet:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1682}})
             )
           )
@@ -1920,7 +1920,7 @@ function PalletTypesPage({ data, setData }) {
             , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:"#ff8c42",marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1686}}, "🔥 تكلفة التبخير"  )
             , React.createElement('div', { style: {display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,alignItems:"end"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1687}}
               , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1688}}
-                , React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1689}}, "تكلفة التبخير / "   , form.productName||"بليطة", " (ج)" )
+                , React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1689}}, "تكلفة التبخير / "   , form.productName||"بالته", " (ج)" )
                 , React.createElement('input', { style: S.inp, type: "number", value: form.fumigationPerPallet,
                   onChange: e=>setForm(f=>({...f,fumigationPerPallet:e.target.value})), placeholder: "0", __self: this, __source: {fileName: _jsxFileName, lineNumber: 1690}})
               )
@@ -2266,9 +2266,9 @@ function Inventory({ data, setData }) {
             , React.createElement('div', { style: S.cT, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2032}}, "🧮 حاسبة احتياج الخشب للطلبية"    )
             , React.createElement('div', { style: {display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:14,marginBottom:14}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2033}}
               , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 2034}}
-                , React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2035}}, "نوع المنتج / البليطة"   )
+                , React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2035}}, "نوع المنتج / البالته"   )
                 , React.createElement('select', { style: S.sel, value: calcPtId, onChange: e=>setCalcPtId(e.target.value), __self: this, __source: {fileName: _jsxFileName, lineNumber: 2036}}
-                  , (data.palletTypes||[]).map(pt=>React.createElement('option', { key: pt.id, value: pt.id, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2037}}, pt.productName||"بليطة", " — "  , pt.name))
+                  , (data.palletTypes||[]).map(pt=>React.createElement('option', { key: pt.id, value: pt.id, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2037}}, pt.productName||"بالته", " — "  , pt.name))
                 )
               )
               , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 2040}}
@@ -2558,20 +2558,20 @@ function Orders({ data, setData }) {
                 , (data.clients||[]).map(c=>React.createElement('option', { key: c.id, value: c.id, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2324}}, c.company))
               )
             )
-            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 2327}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2327}}, "نوع البليطة" )
+            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 2327}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2327}}, "نوع البالته" )
               , React.createElement('select', { style: S.sel, value: form.palletTypeId, onChange: e=>setForm(f=>({...f,palletTypeId:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 2328}}
                 , (data.palletTypes||[]).map(pt=>React.createElement('option', { key: pt.id, value: pt.id, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2329}}, pt.name))
               )
             )
             , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 2332}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2332}}, "الكمية"), React.createElement('input', { style: S.inp, type: "number", value: form.qty, onChange: e=>setForm(f=>({...f,qty:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 2332}}))
-            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 2333}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2333}}, "سعر البيع (ج/"  , prevCfg?_optionalChain([data, 'access', _114 => _114.palletTypes, 'access', _115 => _115.find, 'call', _116 => _116(pt=>pt.id===form.palletTypeId), 'optionalAccess', _117 => _117.productName])||"بليطة":"بليطة", ") — بدون ض.ق.م"   ), React.createElement('input', { style: S.inp, type: "number", value: form.price, onChange: e=>setForm(f=>({...f,price:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 2333}}))
+            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 2333}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2333}}, "سعر البيع (ج/"  , prevCfg?_optionalChain([data, 'access', _114 => _114.palletTypes, 'access', _115 => _115.find, 'call', _116 => _116(pt=>pt.id===form.palletTypeId), 'optionalAccess', _117 => _117.productName])||"بالته":"بالته", ") — بدون ض.ق.م"   ), React.createElement('input', { style: S.inp, type: "number", value: form.price, onChange: e=>setForm(f=>({...f,price:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 2333}}))
             , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 2334}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2334}}, "تاريخ الطلب" ), React.createElement('input', { style: S.inp, type: "date", value: form.date, onChange: e=>setForm(f=>({...f,date:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 2334}}))
             , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 2335}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2335}}, "تاريخ التسليم" ), React.createElement('input', { style: S.inp, type: "date", value: form.deliveryDate, onChange: e=>setForm(f=>({...f,deliveryDate:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 2335}}))
           )
           , prevCost&&(
             React.createElement('div', { style: {...S.box(P.accent+"44"),marginBottom:14}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2338}}
               , React.createElement('div', { style: {display:"flex",gap:8,alignItems:"center",marginBottom:8,fontSize:12}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2339}}
-                , React.createElement('span', { style: {fontWeight:600,color:P.accent}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2340}}, "تكلفة البليطة" )
+                , React.createElement('span', { style: {fontWeight:600,color:P.accent}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2340}}, "تكلفة البالته" )
                 , isSpec&&React.createElement('span', { style: S.bdg(P.accent), __self: this, __source: {fileName: _jsxFileName, lineNumber: 2341}}, "مواصفة مخصصة" )
               )
               , React.createElement(CostBar, { cost: prevCost, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2343}})
@@ -2601,7 +2601,7 @@ function Orders({ data, setData }) {
       , React.createElement('div', { style: S.card, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2367}}
         , React.createElement('table', { style: S.tbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2368}}, React.createElement('thead', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 2368}}, React.createElement('tr', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 2368}}
           , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2369}}, "رقم"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2369}}, "العميل"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2369}}, "النوع"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2369}}, "مواصفة")
-          , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2370}}, "م³/بليطة"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2370}}, "تكلفة/و")
+          , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2370}}, "م³/بالته"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2370}}, "تكلفة/و")
           , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2371}}, "سعر/و (ب ض)"  ), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2371}}, "ض.ق.م"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2371}}, "سعر (ش ض)"  )
           , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2372}}, "ربح/و"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2372}}, "كمية"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2372}}, "إجمالي ش ض"  )
           , React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2373}}, "التسليم"), React.createElement('th', { style: S.th, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2373}}, "الحالة")
@@ -2671,7 +2671,7 @@ function Production({ data, setData }) {
                 , (data.orders||[]).filter(o=>o.status!=="مكتمل").map(o=>React.createElement('option', { key: o.id, value: o.id, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2437}}, o.id))
               )
             )
-            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 2440}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2440}}, "نوع البليطة" )
+            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 2440}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2440}}, "نوع البالته" )
               , React.createElement('select', { style: S.sel, value: form.palletTypeId, onChange: e=>setForm(f=>({...f,palletTypeId:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 2441}}
                 , (data.palletTypes||[]).map(pt=>React.createElement('option', { key: pt.id, value: pt.id, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2442}}, pt.name))
               )
@@ -2973,7 +2973,7 @@ function Dashboard({ data }) {
         , [
           {label:"إجمالي الطلبيات",value:data.orders.length,unit:"طلب"},
           {label:"طلبيات نشطة",value:(data.orders||[]).filter(o=>o.status==="قيد التصنيع").length,unit:"نشطة"},
-          {label:"بليطة منتجة",value:fmt(totProd),unit:"بليطة"},
+          {label:"بالته منتجة",value:fmt(totProd),unit:"بالته"},
           {label:"إيرادات محصلة",value:fmt(totRev),unit:"جنيه"},
         ].map((x,i)=>(
           React.createElement('div', { key: i, style: S.sc, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2745}}, React.createElement('div', { style: S.sL, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2745}}, x.label), React.createElement('div', { style: S.sV, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2745}}, x.value), React.createElement('div', { style: {fontSize:11,color:P.accentDark}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 2745}}, x.unit))
@@ -3495,7 +3495,7 @@ function TransportPage({ data, setData }) {
 function SettingsPage({ data, setData }) {
   const [form, setForm] = useState({ ...data.settings });
   const save = () => setData(d => ({ ...d, settings: { ...form } }));
-  const productNames = [...new Set((data.palletTypes||[]).map(pt => pt.productName || "بليطة"))];
+  const productNames = [...new Set((data.palletTypes||[]).map(pt => pt.productName || "بالته"))];
 
   return (
     React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 3267}}
@@ -3525,7 +3525,7 @@ function SettingsPage({ data, setData }) {
         )
         /* Group by productName */
         , productNames.map(pname => {
-          const group = (data.palletTypes||[]).filter(pt => (pt.productName || "بليطة") === pname);
+          const group = (data.palletTypes||[]).filter(pt => (pt.productName || "بالته") === pname);
           return (
             React.createElement('div', { key: pname, style: { ...S.box(P.teal + "44"), marginBottom: 12 }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3296}}
               , React.createElement('div', { style: { display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3297}}
@@ -3604,7 +3604,7 @@ function QuotePage({ data, setData }) {
 
   const save = () => {
     if (!form.clientId||form.items.length===0) return;
-    const items = form.items.map(it=>({...it,qty:+it.qty,unitPrice:+it.unitPrice,productName:it.productName||_optionalChain([getPT, 'call', _149 => _149(it.palletTypeId), 'optionalAccess', _150 => _150.productName])||"بليطة",spec:it.spec||buildSpec(it.palletTypeId)}));
+    const items = form.items.map(it=>({...it,qty:+it.qty,unitPrice:+it.unitPrice,productName:it.productName||_optionalChain([getPT, 'call', _149 => _149(it.palletTypeId), 'optionalAccess', _150 => _150.productName])||"بالته",spec:it.spec||buildSpec(it.palletTypeId)}));
     const q = { id:`QUO-${String((data.quotations||[]).length+1).padStart(3,"0")}`, ...form, validDays:+form.validDays, creditDays:+form.creditDays, items };
     setData(d=>({...d, quotations:[...(d.quotations||[]),q]}));
     setSf(false); setForm(ef);
@@ -3648,7 +3648,7 @@ function QuotePage({ data, setData }) {
     const paymentTerm = +q.creditDays>0 ? `آجل ${q.creditDays} يوم` : "نقدي";
     const numWords    = n => `${fmt(+n.toFixed(2))} جنيه مصري فقط لا غير`;
 
-    // رسم بياني SVG للبليطة
+    // رسم بياني SVG للبالته
     const PalletSketch = ({ pt, sp }) => {
       if (!pt) return null;
       const pieces = _optionalChain([sp, 'optionalAccess', _153 => _153.pieces]) || pt.pieces || [];
@@ -3748,7 +3748,7 @@ function QuotePage({ data, setData }) {
                 , React.createElement('div', { style: {display:"flex",alignItems:"center",gap:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3514}}
                   , React.createElement('span', { style: {backgroundColor:P.accent,color:"#1a1200",borderRadius:"50%",width:26,height:26,display:"inline-flex",alignItems:"center",justifyContent:"center",fontWeight:800,fontSize:13}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3515}}, idx+1)
                   , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 3516}}
-                    , React.createElement('div', { style: {fontSize:17,fontWeight:800,color:P.text}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3517}}, it.productName||"بليطة", " " , pt?`— ${pt.name}`:"")
+                    , React.createElement('div', { style: {fontSize:17,fontWeight:800,color:P.text}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3517}}, it.productName||"بالته", " " , pt?`— ${pt.name}`:"")
                     , sp&&React.createElement('span', { style: {...S.bdg(P.accent),fontSize:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3518}}, "مواصفة مخصصة للعميل"  )
                   )
                 )
@@ -3875,7 +3875,7 @@ function QuotePage({ data, setData }) {
               , (q.items||[]).length>1&&(q.items||[]).map((it,i)=>{
                 const n=(+it.qty||0)*(+it.unitPrice||0);
                 return React.createElement('div', { key: i, style: {display:"flex",justifyContent:"space-between",padding:"4px 0",fontSize:12,borderBottom:`1px solid ${P.border+"44"}`}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3643}}
-                  , React.createElement('span', { style: {color:P.muted}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3644}}, it.productName||"بليطة", " (" , fmt(it.qty), " وحدة):" )
+                  , React.createElement('span', { style: {color:P.muted}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3644}}, it.productName||"بالته", " (" , fmt(it.qty), " وحدة):" )
                   , React.createElement('span', { style: {fontWeight:600}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3645}}, fmt(n), " ج" )
                 );
               })
@@ -3998,10 +3998,10 @@ function QuotePage({ data, setData }) {
                     , React.createElement('select', { style: S.sel, value: it.palletTypeId, onChange: e=>{
                       const pt=getPT(e.target.value);
                       fItem(i,"palletTypeId",e.target.value);
-                      fItem(i,"productName",_optionalChain([pt, 'optionalAccess', _191 => _191.productName])||"بليطة");
+                      fItem(i,"productName",_optionalChain([pt, 'optionalAccess', _191 => _191.productName])||"بالته");
                       fItem(i,"spec",buildSpec(e.target.value));
                     }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3764}}
-                      , (data.palletTypes||[]).map(pt=>React.createElement('option', { key: pt.id, value: pt.id, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3770}}, pt.productName||"بليطة", " — "  , pt.name))
+                      , (data.palletTypes||[]).map(pt=>React.createElement('option', { key: pt.id, value: pt.id, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3770}}, pt.productName||"بالته", " — "  , pt.name))
                     )
                   )
                   , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 3773}}
@@ -4121,7 +4121,7 @@ function QuotePage({ data, setData }) {
                 , React.createElement('div', { style: {display:"flex",gap:8,marginTop:10,flexWrap:"wrap"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3887}}
                   , q.items.map((it,i)=>(
                     React.createElement('div', { key: i, style: {backgroundColor:P.surface,border:`1px solid ${P.border}`,borderRadius:8,padding:"4px 12px",fontSize:12}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3889}}
-                      , React.createElement('b', { style: {color:P.accent}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3890}}, fmt(it.qty)), " " , it.productName||"بليطة", " — "  , React.createElement('span', { style: {color:P.muted}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3890}}, it.spec), " — "  , React.createElement('b', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 3890}}, fmt(it.unitPrice), " ج/وحدة" )
+                      , React.createElement('b', { style: {color:P.accent}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3890}}, fmt(it.qty)), " " , it.productName||"بالته", " — "  , React.createElement('span', { style: {color:P.muted}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 3890}}, it.spec), " — "  , React.createElement('b', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 3890}}, fmt(it.unitPrice), " ج/وحدة" )
                     )
                   ))
                 )
@@ -4164,7 +4164,7 @@ function DeliveryNotes({ data, setData }) {
 
   const save = () => {
     if (!form.clientId) return;
-    const items = form.items.map(it=>({...it, qty:+it.qty, productName: it.productName||_optionalChain([getPT, 'call', _201 => _201(it.palletTypeId), 'optionalAccess', _202 => _202.productName])||"بليطة"}));
+    const items = form.items.map(it=>({...it, qty:+it.qty, productName: it.productName||_optionalChain([getPT, 'call', _201 => _201(it.palletTypeId), 'optionalAccess', _202 => _202.productName])||"بالته"}));
     const dn = { id:`DEL-${String((data.deliveryNotes||[]).length+1).padStart(3,"0")}`, ...form, items };
     setData(d=>({...d, deliveryNotes:[...(d.deliveryNotes||[]),dn]}));
     setSf(false); setForm(ef);
@@ -4244,12 +4244,12 @@ function DeliveryNotes({ data, setData }) {
                   , React.createElement('select', { style: S.sel, value: it.palletTypeId, onChange: e=>{
                     const pt=getPT(e.target.value);
                     fItem(i,"palletTypeId",e.target.value);
-                    fItem(i,"productName",_optionalChain([pt, 'optionalAccess', _204 => _204.productName])||"بليطة");
+                    fItem(i,"productName",_optionalChain([pt, 'optionalAccess', _204 => _204.productName])||"بالته");
                   }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4008}}
-                    , (data.palletTypes||[]).map(pt=>React.createElement('option', { key: pt.id, value: pt.id, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4013}}, pt.productName||"بليطة", " — "  , pt.name))
+                    , (data.palletTypes||[]).map(pt=>React.createElement('option', { key: pt.id, value: pt.id, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4013}}, pt.productName||"بالته", " — "  , pt.name))
                   )
                 )
-                , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 4016}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4016}}, "اسم الوحدة" ), React.createElement('input', { style: S.inp, value: it.productName||_optionalChain([getPT, 'call', _205 => _205(it.palletTypeId), 'optionalAccess', _206 => _206.productName])||"بليطة", onChange: e=>fItem(i,"productName",e.target.value), __self: this, __source: {fileName: _jsxFileName, lineNumber: 4016}}))
+                , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 4016}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4016}}, "اسم الوحدة" ), React.createElement('input', { style: S.inp, value: it.productName||_optionalChain([getPT, 'call', _205 => _205(it.palletTypeId), 'optionalAccess', _206 => _206.productName])||"بالته", onChange: e=>fItem(i,"productName",e.target.value), __self: this, __source: {fileName: _jsxFileName, lineNumber: 4016}}))
                 , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 4017}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4017}}, "الكمية المسلمة *"  ), React.createElement('input', { type: "number", style: {...S.inp,fontWeight:700,fontSize:15}, value: it.qty, onChange: e=>fItem(i,"qty",e.target.value), __self: this, __source: {fileName: _jsxFileName, lineNumber: 4017}}))
                 , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 4018}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4018}}, "ملاحظات"), React.createElement('input', { style: S.inp, value: it.notes, onChange: e=>fItem(i,"notes",e.target.value), __self: this, __source: {fileName: _jsxFileName, lineNumber: 4018}}))
                 , React.createElement('button', { style: {...S.btn("d"),alignSelf:"flex-end",padding:"8px 10px"}, onClick: ()=>remItem(i), __self: this, __source: {fileName: _jsxFileName, lineNumber: 4019}}, "🗑")
@@ -4331,7 +4331,7 @@ function DeliveryNotes({ data, setData }) {
                 , viewDN.items.map((it,i)=>(
                   React.createElement('tr', { key: i, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4096}}
                     , React.createElement('td', { style: {...S.td,color:P.muted}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4097}}, i+1)
-                    , React.createElement('td', { style: {...S.td,fontWeight:600}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4098}}, it.productName||"بليطة")
+                    , React.createElement('td', { style: {...S.td,fontWeight:600}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4098}}, it.productName||"بالته")
                     , React.createElement('td', { style: S.td, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4099}}, _optionalChain([getPT, 'call', _219 => _219(it.palletTypeId), 'optionalAccess', _220 => _220.name]))
                     , React.createElement('td', { style: {...S.td,fontWeight:700,fontSize:16,color:P.accent}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4100}}, fmt(it.qty))
                     , React.createElement('td', { style: {...S.td,color:P.muted}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4101}}, it.notes||"—")
@@ -4407,7 +4407,7 @@ function DeliveryNotes({ data, setData }) {
                   , React.createElement('div', { style: {textAlign:"center",minWidth:80}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4171}}
                     , React.createElement('div', { style: {fontSize:10,color:P.muted}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4172}}, "الكمية")
                     , React.createElement('div', { style: {fontSize:18,fontWeight:700,color:P.accent}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4173}}, fmt(totalQty))
-                    , React.createElement('div', { style: {fontSize:10,color:P.muted}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4174}}, dn.items.map(it=>it.productName||"بليطة").join(" / "))
+                    , React.createElement('div', { style: {fontSize:10,color:P.muted}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4174}}, dn.items.map(it=>it.productName||"بالته").join(" / "))
                   )
                   /* Driver */
                   , React.createElement('div', { style: {textAlign:"center",minWidth:120}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4177}}
@@ -4435,7 +4435,7 @@ function DeliveryNotes({ data, setData }) {
                 , React.createElement('div', { style: {display:"flex",gap:8,marginTop:10,flexWrap:"wrap"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4199}}
                   , dn.items.map((it,i)=>(
                     React.createElement('div', { key: i, style: {backgroundColor:P.surface,border:`1px solid ${P.border}`,borderRadius:8,padding:"4px 12px",fontSize:12}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4201}}
-                      , React.createElement('b', { style: {color:P.accent}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4202}}, fmt(it.qty)), " " , it.productName||"بليطة", " — "  , _optionalChain([getPT, 'call', _228 => _228(it.palletTypeId), 'optionalAccess', _229 => _229.name])
+                      , React.createElement('b', { style: {color:P.accent}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4202}}, fmt(it.qty)), " " , it.productName||"بالته", " — "  , _optionalChain([getPT, 'call', _228 => _228(it.palletTypeId), 'optionalAccess', _229 => _229.name])
                       , it.notes&&React.createElement('span', { style: {color:P.muted}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 4203}}, " · "  , it.notes)
                     )
                   ))
