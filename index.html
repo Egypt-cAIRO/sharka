@@ -3948,12 +3948,14 @@ function setSbStatus(msg){ console.log('DB:', msg); }
 async function sbLoad(setData) {
   if(!sbUser) return;
   try {
-    const {data:row, error} = await sb.from('sharka_data').select('data').eq('user_id', sbUser).maybeSingle();
+    const timeout = new Promise((_,rej)=>setTimeout(()=>rej('timeout'),5000));
+    const query = sb.from('sharka_data').select('data').eq('user_id', sbUser).maybeSingle();
+    const {data:row} = await Promise.race([query, timeout]);
     if(row && row.data) {
-      setData({...initialData, ...row.data});
+      setData(prev=>({...prev, ...row.data}));
     }
   } catch(e) {
-    console.log('Load error:', e);
+    console.log('Load skipped:', e);
   }
 }
 
