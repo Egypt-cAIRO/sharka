@@ -4380,7 +4380,15 @@ function App() {
 
 
   try {
-    // ═══ SUPABASE ═══
+    ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
+    var sp0 = document.getElementById("splash");
+    if(sp0){ sp0.style.opacity="0"; setTimeout(function(){sp0.remove();},500); }
+  } catch(e) {
+    console.error(e);
+  }
+})();
+
+// ═══ SUPABASE ═══
 var SUPABASE_URL = 'https://chkiyrqlloufzahdktzs.supabase.co';
 var SUPABASE_KEY = 'sb_publishable_6ZxUW8NESoxyrDQe_KE5mA_XX-aZFZQ';
 var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
