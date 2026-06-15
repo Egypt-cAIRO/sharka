@@ -954,11 +954,11 @@ function ClientSpecsPage({ data, setData }) {
   const cost   = cfg ? calcCost(pieces, cfg) : null;
   const stdCost= pt  ? calcCost(pt.pieces, pt) : null;
 
-  const saveSpec=(ps,wc,tc,notes)=>{
+  const saveSpec=(ps,wc,tc,fc,notes)=>{
     setData(d=>{
       const specs=JSON.parse(JSON.stringify(d.clientSpecs||{}));
       if(!specs[clientId]) specs[clientId]={};
-      specs[clientId][ptId]={pieces:ps, woodCostPerM3:+wc, transportPerPallet:+tc, notes};
+      specs[clientId][ptId]={pieces:ps, woodCostPerM3:+wc, transportPerPallet:+tc, fumigationPerPallet:+(fc||0), notes};
       return{...d,clientSpecs:specs};
     });
     setEditMode(false);
@@ -1019,7 +1019,7 @@ function ClientSpecsPage({ data, setData }) {
               , spec&&React.createElement('div', { style: {marginTop:10,fontSize:11,color:P.muted}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 792}}, "سعر م³: "  , fmt(wCost), " ج · نقل: "    , fmtC(tCost), " ج/بليطة · "   , spec.notes||"")
             )
           ):(
-            React.createElement(SpecEditor, { init: {pieces,woodCostPerM3:wCost,transportPerPallet:tCost,fumigationPerPallet:_nullishCoalesce(_nullishCoalesce(_optionalChain([spec, 'optionalAccess', _41 => _41.fumigationPerPallet]), () => (_optionalChain([selPT, 'optionalAccess', _42 => _42.fumigationPerPallet]))), () => (0)),notes:_optionalChain([spec, 'optionalAccess', _43 => _43.notes])||""}, onSave: saveSpec, onCancel: ()=>setEditMode(false), __self: this, __source: {fileName: _jsxFileName, lineNumber: 795}})
+            React.createElement(SpecEditor, { init: {pieces,woodCostPerM3:wCost,transportPerPallet:tCost,fumigationPerPallet:_nullishCoalesce(_nullishCoalesce(_optionalChain([spec, 'optionalAccess', _41 => _41.fumigationPerPallet]), () => (_optionalChain([pt, 'optionalAccess', _42 => _42.fumigationPerPallet]))), () => (0)),notes:_optionalChain([spec, 'optionalAccess', _43 => _43.notes])||""}, onSave: saveSpec, onCancel: ()=>setEditMode(false), __self: this, __source: {fileName: _jsxFileName, lineNumber: 795}})
           )
         )
       )
@@ -1230,11 +1230,11 @@ function ClientCard({ client, data, setData, mode, isExpanded, onToggle, onEdit,
   const specCount   = Object.keys(clientSpecs).length;
 
   // save a spec
-  const saveSpec = (ptId, pieces, woodCostPerM3, transportPerPallet, notes) => {
+  const saveSpec = (ptId, pieces, woodCostPerM3, transportPerPallet, fumigationPerPallet, notes) => {
     setData(d => {
       const specs = JSON.parse(JSON.stringify(d.clientSpecs || {}));
       if (!specs[client.id]) specs[client.id] = {};
-      specs[client.id][ptId] = { pieces, woodCostPerM3:+woodCostPerM3, transportPerPallet:+transportPerPallet, notes };
+      specs[client.id][ptId] = { pieces, woodCostPerM3:+woodCostPerM3, transportPerPallet:+transportPerPallet, fumigationPerPallet:+(fumigationPerPallet||0), notes };
       return { ...d, clientSpecs: specs };
     });
     setEditingSpec(null); setSpecForm(null);
@@ -1491,7 +1491,7 @@ function PalletTypesPage({ data, setData }) {
   const addP=()=>setForm(f=>({...f,pieces:[...f.pieces,{label:"",length:"",width:"",thickness:"",count:"1"}]}));
   const remP=i=>setForm(f=>({...f,pieces:f.pieces.filter((_,j)=>j!==i)}));
   const save=()=>{
-    if(!form.name) return;
+    if(!form.name||!form.productName){alert("يرجى ملء اسم المنتج واسم النوع / المواصفة");return;}
     const pieces=form.pieces.map(p=>({...p,length:+p.length,width:+p.width,thickness:+p.thickness,count:+p.count}));
     const np={id:`PT-${String(data.palletTypes.length+1).padStart(3,"0")}`,...form,pieces,
       nailsKg:+form.nailsKg,woodCostPerM3:+form.woodCostPerM3,nailCostPerKg:+form.nailCostPerKg,
