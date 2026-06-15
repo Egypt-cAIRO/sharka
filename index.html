@@ -4432,41 +4432,63 @@ function App() {
     } catch(e){ console.log('sbSave error:', e); }
   }
 
-  // ── App wrapper with save/load ──
-  function AppWithAuth(){
-    var s1 = React.useState(window.__initialData__ || {}); var data = s1[0]; var setData = s1[1];
-    var s2 = React.useState(false); var ready = s2[0]; var setReady = s2[1];
-
-    React.useEffect(function(){
-      sbLoad(setData).finally(function(){ setReady(true); });
-    }, []);
-
-    var setDataAndSave = React.useCallback(function(updater){
-      setData(function(prev){
-        var next = typeof updater === 'function' ? updater(prev) : updater;
-        sbSave(next);
-        return next;
-      });
-    }, []);
-
-    if(!ready) return React.createElement('div', {
-      style:{display:'flex',alignItems:'center',justifyContent:'center',height:'100vh',color:'#c9a84c',fontSize:18,fontFamily:'Cairo,sans-serif',flexDirection:'column',gap:12}
-    },
-      React.createElement('div', null, '🔄'),
-      React.createElement('div', null, 'جاري تحميل البيانات...')
-    );
-    return React.createElement(App, { data: data, setData: setDataAndSave });
-  }
-
-  // ── Mount app ──
+  // ── Load data then mount app ──
   function mountApp(){
     showApp();
-    // Save initialData for AppWithAuth
-    window.__initialData__ = window.initialData || {};
-    if(!appRoot) appRoot = ReactDOM.createRoot(document.getElementById('root'));
-    appRoot.render(React.createElement(AppWithAuth));
     var sp = document.getElementById('splash');
     if(sp){ sp.style.opacity='0'; setTimeout(function(){sp.remove();}, 500); }
+
+    // Show loading
+    var root = document.getElementById('root');
+    root.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;color:#c9a84c;font-size:18px;font-family:Cairo,sans-serif;flex-direction:column;gap:12px"><div>🔄</div><div>جاري تحميل البيانات...</div></div>';
+
+    // Load from Supabase then override initialData and mount React
+    sbLoadRaw().then(function(savedData){
+      if(savedData){
+        // Patch initialData in place so App's useState picks it up
+        Object.keys(savedData).forEach(function(k){ initialData[k] = savedData[k]; });
+      }
+      // Now mount the real App — it will use the patched initialData
+      // Patch React.useState to intercept App's data state
+      var _origUseState = React.useState;
+      var _patched = false;
+      React.useState = function(init){
+        var result = _origUseState.call(this, init);
+        // Detect the data state (initialData is an object with clients key)
+        if(!_patched && init && typeof init === 'object' && init.clients){
+          _patched = true;
+          var origSetter = result[1];
+          result[1] = function(updater){
+            origSetter(function(prev){
+              var next = typeof updater === 'function' ? updater(prev) : updater;
+              sbSave(next);
+              return next;
+            });
+          };
+          React.useState = _origUseState; // restore after patching
+        }
+        return result;
+      };
+      if(!appRoot) appRoot = ReactDOM.createRoot(document.getElementById('root'));
+      appRoot.render(React.createElement(App));
+      React.useState = _origUseState; // ensure restored
+    });
+  }
+
+  // ── Load raw data from Supabase ──
+  async function sbLoadRaw(){
+    try {
+      var p = sb.from('sharka_data').select('data').eq('user_id', sbUser).maybeSingle();
+      var timeout = new Promise(function(_, rej){ setTimeout(function(){ rej('timeout'); }, 6000); });
+      var res = await Promise.race([p, timeout]);
+      if(res && res.data && res.data.data) return res.data.data;
+    } catch(e){ console.log('sbLoad skipped:', e); }
+    return null;
+  }
+
+  // ── App wrapper — initialData already patched, mount App directly ──
+  function AppWithSave(){
+    return React.createElement(App);
   }
 
   // ── Login ──
