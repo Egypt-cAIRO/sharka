@@ -808,7 +808,7 @@ function ClientSpecsPage({ data, setData }) {
   const pieces = _optionalChain([spec, 'optionalAccess', _32 => _32.pieces]) || _optionalChain([pt, 'optionalAccess', _33 => _33.pieces]) || [];
   const wCost  = _nullishCoalesce(_nullishCoalesce(_optionalChain([spec, 'optionalAccess', _34 => _34.woodCostPerM3]), () => ( _optionalChain([pt, 'optionalAccess', _35 => _35.woodCostPerM3]))), () => ( 0));
   const tCost  = _nullishCoalesce(_nullishCoalesce(_optionalChain([spec, 'optionalAccess', _36 => _36.transportPerPallet]), () => ( _optionalChain([pt, 'optionalAccess', _37 => _37.transportPerPallet]))), () => ( 0));
-  const cfg    = pt ? {...pt, woodCostPerM3:wCost, transportPerPallet:tCost, fumigationPerPallet:_nullishCoalesce(_nullishCoalesce(_optionalChain([sp, 'optionalAccess', _38 => _38.fumigationPerPallet]), () => (_optionalChain([pt, 'optionalAccess', _39 => _39.fumigationPerPallet]))), () => (0))} : null;
+  const cfg    = pt ? {...pt, woodCostPerM3:wCost, transportPerPallet:tCost, fumigationPerPallet:_nullishCoalesce(_nullishCoalesce(_optionalChain([spec, 'optionalAccess', _38 => _38.fumigationPerPallet]), () => (_optionalChain([pt, 'optionalAccess', _39 => _39.fumigationPerPallet]))), () => (0))} : null;
   const cost   = cfg ? calcCost(pieces, cfg) : null;
   const stdCost= pt  ? calcCost(pt.pieces, pt) : null;
 
