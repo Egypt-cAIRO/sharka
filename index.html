@@ -97,6 +97,156 @@ const printDocument = (elementId, title = "وثيقة") => {
   const el = document.getElementById(elementId);
   if (!el) { window.print(); return; }
 
+  const isDelivery = elementId === 'delivery-print-area';
+
+  if (isDelivery) {
+    // ── Clean structured delivery note print ──
+    const dn = window._currentViewDN;
+    const appData = window._currentAppData;
+    if (!dn || !appData) { window.print(); return; }
+
+    const client = (appData.clients||[]).find(c => c.id === dn.clientId) || {};
+    const getPT  = id => (appData.palletTypes||[]).find(p => p.id === id) || {};
+    const totalQty = (dn.items||[]).reduce((s,it) => s + (+it.qty||0), 0);
+
+    const itemRows = (dn.items||[]).map((it, i) => `
+      <tr>
+        <td style="text-align:center">${i+1}</td>
+        <td>${it.productName||'بليطة'}</td>
+        <td>${getPT(it.palletTypeId).name||'—'}</td>
+        <td style="text-align:center;font-weight:700;font-size:15px">${it.qty}</td>
+        <td>${it.notes||'—'}</td>
+      </tr>`).join('');
+
+    const factoryName = (appData.settings||{}).factoryName || 'الشركة المصرية الخليجية';
+    const factoryLogo = (appData.settings||{}).factoryLogo || '🏭';
+
+    const html = `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <title>${title}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Cairo','Arial',sans-serif;direction:rtl;background:white;color:#111;padding:20mm 15mm;font-size:13px}
+    .header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #c8a96e;padding-bottom:14px;margin-bottom:18px}
+    .company-name{font-size:20px;font-weight:800;color:#8B6914}
+    .company-sub{font-size:11px;color:#666;margin-top:3px}
+    .doc-title{text-align:left}
+    .doc-title h2{font-size:18px;font-weight:800;color:#8B6914}
+    .doc-title .doc-id{font-size:22px;font-weight:900;color:#333;margin:4px 0}
+    .doc-title .doc-date{font-size:11px;color:#666}
+    .section{border:1px solid #ddd;border-radius:6px;padding:12px 14px;margin-bottom:12px}
+    .section-title{font-size:11px;color:#888;font-weight:700;margin-bottom:8px;text-transform:uppercase}
+    .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px}
+    .info-item span{color:#666;font-size:11px;display:block}
+    .info-item b{font-size:13px;color:#111}
+    table{width:100%;border-collapse:collapse;margin-top:4px}
+    th{background:#f5ede0;color:#333;padding:8px 10px;border:1px solid #ddd;font-size:12px;text-align:right}
+    td{padding:8px 10px;border:1px solid #eee;color:#111;font-size:13px}
+    tr:nth-child(even) td{background:#fafaf8}
+    .total-row td{background:#f5ede0!important;font-weight:700;font-size:14px}
+    .sig-section{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:24px}
+    .sig-box{border:1px solid #ccc;border-radius:6px;padding:10px 14px;text-align:center;min-height:80px}
+    .sig-box .sig-label{font-size:11px;color:#888;margin-bottom:24px}
+    .sig-box .sig-name{font-size:12px;color:#333;font-weight:600;margin-bottom:6px}
+    .sig-box .sig-line{border-top:1px solid #aaa;margin-top:8px;padding-top:5px;font-size:10px;color:#aaa}
+    .notes{font-size:12px;color:#555;margin-bottom:12px;padding:8px 12px;background:#fffdf7;border-right:3px solid #c8a96e;border-radius:4px}
+    .footer{margin-top:24px;padding-top:10px;border-top:1px solid #eee;font-size:10px;color:#aaa;text-align:center}
+    @page{size:A4;margin:0}
+    @media print{body{padding:15mm}}
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="company-name">${factoryLogo} ${factoryName}</div>
+      <div class="company-sub">إذن تسليم بضاعة</div>
+    </div>
+    <div class="doc-title">
+      <h2>إذن تسليم</h2>
+      <div class="doc-id">${dn.id}</div>
+      <div class="doc-date">التاريخ: ${dn.date}</div>
+      ${dn.orderId ? `<div class="doc-date">رقم الطلبية: ${dn.orderId}</div>` : ''}
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🏢 بيانات العميل</div>
+    <div class="info-grid">
+      <div class="info-item"><span>اسم الشركة</span><b>${client.company||'—'}</b></div>
+      <div class="info-item"><span>المسؤول</span><b>${client.contact||'—'}</b></div>
+      <div class="info-item"><span>موبايل</span><b>${client.phone||'—'}</b></div>
+      <div class="info-item"><span>العنوان</span><b>${client.address||'—'}</b></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📦 الأصناف المسلمة</div>
+    <table>
+      <thead><tr>
+        <th style="width:40px;text-align:center">#</th>
+        <th>الصنف</th>
+        <th>النوع / المواصفة</th>
+        <th style="width:80px;text-align:center">الكمية</th>
+        <th>ملاحظات</th>
+      </tr></thead>
+      <tbody>
+        ${itemRows}
+        <tr class="total-row">
+          <td colspan="3" style="text-align:right">الإجمالي</td>
+          <td style="text-align:center;font-size:16px">${totalQty}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-grid" style="gap:12px;margin-bottom:12px">
+    <div class="section">
+      <div class="section-title">🚚 بيانات التوصيل</div>
+      <div class="info-item" style="margin-bottom:6px"><span>السائق</span><b>${dn.driverName||'—'}</b></div>
+      <div class="info-item"><span>رقم السيارة</span><b>${dn.plateNumber||'—'}</b></div>
+    </div>
+    <div class="section">
+      <div class="section-title">✍️ بيانات الاستلام</div>
+      <div class="info-item" style="margin-bottom:6px"><span>اسم المستلم</span><b>${dn.receiverName||'—'}</b></div>
+      <div class="info-item"><span>حالة التوقيع</span><b>${dn.receiverSignature||'لم يوقع بعد'}</b></div>
+    </div>
+  </div>
+
+  ${dn.notes ? `<div class="notes">📝 ملاحظات: ${dn.notes}</div>` : ''}
+
+  <div class="sig-section">
+    <div class="sig-box">
+      <div class="sig-label">توقيع المستلم</div>
+      ${dn.receiverName ? `<div class="sig-name">${dn.receiverName}</div>` : ''}
+      <div class="sig-line">الاسم والتوقيع</div>
+    </div>
+    <div class="sig-box">
+      <div class="sig-label">توقيع المسلِّم</div>
+      <div class="sig-line">الاسم والتوقيع</div>
+    </div>
+    <div class="sig-box">
+      <div class="sig-label">توقيع مدير المصنع</div>
+      <div class="sig-line">الاسم والتوقيع</div>
+    </div>
+  </div>
+
+  <div class="footer">${factoryName} — طُبع بتاريخ ${new Date().toLocaleDateString('ar-EG')}</div>
+
+  <script>window.onload=function(){setTimeout(function(){window.print();window.close();},600);}<\/script>
+</body>
+</html>`;
+
+    const printWin = window.open('', '_blank', 'width=900,height=700');
+    printWin.document.write(html);
+    printWin.document.close();
+    return;
+  }
+
+  // ── Default print (quotes etc.) ──
   const content = el.innerHTML;
   const printWin = window.open('', '_blank', 'width=900,height=700');
   printWin.document.write(`<!DOCTYPE html>
@@ -115,29 +265,21 @@ const printDocument = (elementId, title = "وثيقة") => {
       padding: 20px;
       font-size: 13px;
     }
-    /* Colors mapped to print */
     [style*="color: rgb(200, 169, 110)"],
     [style*="color:#c8a96e"] { color: #8B6914 !important; }
     [style*="background-color: rgb(200, 169, 110)"],
     [style*="background:#c8a96e"] { background: #f5e6c0 !important; }
-    /* Tables */
     table { width: 100%; border-collapse: collapse; margin: 8px 0; }
     th { background: #f0e8d5 !important; color: #333 !important; padding: 8px 10px; border: 1px solid #ccc; font-size: 12px; text-align: right; }
     td { padding: 7px 10px; border: 1px solid #ddd; color: #222 !important; background: white !important; }
     tr:nth-child(even) td { background: #fafafa !important; }
-    /* Boxes */
     div[style*="border"] { border-color: #ccc !important; }
     div[style*="background"] { background: white !important; }
-    /* Hide buttons */
     button { display: none !important; }
-    /* Signature boxes */
-    .sig-box { border: 1px solid #999; border-radius: 4px; padding: 12px; text-align: center; min-height: 80px; }
-    /* Force black text */
     * { color: #111 !important; }
     h1,h2,h3,b,strong { color: #000 !important; }
     .company-name { color: #8B6914 !important; font-size: 22px; font-weight: 800; }
     .doc-number { color: #8B6914 !important; font-size: 18px; font-weight: 700; }
-    /* Page breaks */
     @page { size: A4; margin: 15mm; }
     @media print { body { padding: 0; } }
   </style>
@@ -4033,6 +4175,8 @@ function DeliveryNotes({ data, setData }) {
   const statusCol = s => s==="مسلم"?P.green:s==="جزئي"?P.yellow:s==="مسودة"?P.muted:P.blue;
 
   const viewDN = view ? (data.deliveryNotes||[]).find(d=>d.id===view) : null;
+  window._currentViewDN = viewDN;
+  window._currentAppData = data;
 
   return (
     React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 3953}}
