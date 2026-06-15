@@ -979,6 +979,7 @@ function SpecEditor({ init, onSave, onCancel }) {
 // CONTACTS
 // =====================================================================
 function ContactsPage({ data, setData, mode }) {
+  const isClient = mode === "clients";
   const key = mode==="clients" ? "clients" : "suppliers";
   const pfx = mode==="clients" ? "CLT" : "SUP";
   const lbl = mode==="clients" ? "عميل" : "مورّد";
@@ -1077,7 +1078,6 @@ function ContactsPage({ data, setData, mode }) {
 
 // ---- Client Card with inline specs ----
 function ClientCard({ client, data, setData, mode, isExpanded, onToggle, onEdit, onRemove }) {
-  const isClient = mode === "clients";
 
   // specs state
   const [specPtId,   setSpecPtId]   = useState(_optionalChain([data, 'access', _54 => _54.palletTypes, 'access', _55 => _55[0], 'optionalAccess', _56 => _56.id]) || "");
