@@ -1019,7 +1019,7 @@ function ClientSpecsPage({ data, setData }) {
               , spec&&React.createElement('div', { style: {marginTop:10,fontSize:11,color:P.muted}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 792}}, "سعر م³: "  , fmt(wCost), " ج · نقل: "    , fmtC(tCost), " ج/بليطة · "   , spec.notes||"")
             )
           ):(
-            React.createElement(SpecEditor, { init: {pieces,woodCostPerM3:wCost,transportPerPallet:tCost,fumigationPerPallet:_nullishCoalesce(_nullishCoalesce(_optionalChain([spec, 'optionalAccess', _41 => _41.fumigationPerPallet]), () => (_optionalChain([pt, 'optionalAccess', _42 => _42.fumigationPerPallet]))), () => (0)),notes:_optionalChain([spec, 'optionalAccess', _43 => _43.notes])||""}, onSave: saveSpec, onCancel: ()=>setEditMode(false), __self: this, __source: {fileName: _jsxFileName, lineNumber: 795}})
+            React.createElement(SpecEditor, { key: clientId+'_'+ptId, init: {pieces,woodCostPerM3:wCost,transportPerPallet:tCost,fumigationPerPallet:_nullishCoalesce(_nullishCoalesce(_optionalChain([spec, 'optionalAccess', _41 => _41.fumigationPerPallet]), () => (_optionalChain([pt, 'optionalAccess', _42 => _42.fumigationPerPallet]))), () => (0)),notes:_optionalChain([spec, 'optionalAccess', _43 => _43.notes])||""}, onSave: saveSpec, onCancel: ()=>setEditMode(false), __self: this, __source: {fileName: _jsxFileName, lineNumber: 795}})
           )
         )
       )
@@ -1087,11 +1087,18 @@ function ClientSpecsPage({ data, setData }) {
 }
 
 function SpecEditor({ init, onSave, onCancel }) {
-  const [pieces,setPieces]=useState(JSON.parse(JSON.stringify(init.pieces)));
-  const [wc,setWc]=useState(init.woodCostPerM3);
-  const [tc,setTc]=useState(init.transportPerPallet||0);
-  const [fc,setFc]=useState(init.fumigationPerPallet||0);
-  const [notes,setNotes]=useState(init.notes);
+  const [pieces,setPieces]=useState(()=>JSON.parse(JSON.stringify(init.pieces)));
+  const [wc,setWc]=useState(()=>init.woodCostPerM3);
+  const [tc,setTc]=useState(()=>init.transportPerPallet||0);
+  const [fc,setFc]=useState(()=>init.fumigationPerPallet||0);
+  const [notes,setNotes]=useState(()=>init.notes||'');
+  useEffect(()=>{
+    setPieces(JSON.parse(JSON.stringify(init.pieces)));
+    setWc(init.woodCostPerM3);
+    setTc(init.transportPerPallet||0);
+    setFc(init.fumigationPerPallet||0);
+    setNotes(init.notes||'');
+  },[init.woodCostPerM3,init.transportPerPallet,init.fumigationPerPallet,init.notes]);
   return (
     React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 869}}
       , React.createElement('div', { style: {...S.box(P.accent+"44"),marginBottom:12}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 870}}
