@@ -1564,6 +1564,76 @@ function PalletTypesPage({ data, setData }) {
         , React.createElement('h2', { style: {...S.pH,margin:0}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1330}}, "📐 أنواع المنتجات والتسعير"   )
         , React.createElement('button', { style: S.btn("p"), onClick: ()=>setSf(!sf), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1331}}, "+ منتج جديد"  )
       )
+      , sf&&(
+        React.createElement('div', { style: S.card, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1650}}
+          , React.createElement('div', { style: S.cT, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1651}}, "إضافة منتج جديد"  )
+          , React.createElement('div', { style: {...S.fg2,marginBottom:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1652}}
+            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1653}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1653}}, "اسم المنتج (الوحدة) — مثال: بالته، صندوق، رف"       )
+              , React.createElement('input', { style: S.inp, value: form.productName, onChange: e=>setForm(f=>({...f,productName:e.target.value})), placeholder: "بالته", __self: this, __source: {fileName: _jsxFileName, lineNumber: 1654}})
+            )
+            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1656}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1656}}, "اسم النوع / المواصفة"   ), React.createElement('input', { style: S.inp, value: form.name, onChange: e=>setForm(f=>({...f,name:e.target.value})), placeholder: "يورو 120×80" , __self: this, __source: {fileName: _jsxFileName, lineNumber: 1656}}))
+            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1657}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1657}}, "نوع الخشب" ), React.createElement('input', { style: S.inp, value: form.woodType, onChange: e=>setForm(f=>({...f,woodType:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1657}}))
+            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1658}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1658}}, "سعر م³ (ج)"  ), React.createElement('input', { style: S.inp, type: "number", value: form.woodCostPerM3, onChange: e=>setForm(f=>({...f,woodCostPerM3:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1658}}))
+            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1659}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1659}}, "مسامير كجم/" , form.productName||"بالته"), React.createElement('input', { style: S.inp, type: "number", value: form.nailsKg, onChange: e=>setForm(f=>({...f,nailsKg:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1659}}))
+            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1660}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1660}}, "سعر كجم مسامير"  ), React.createElement('input', { style: S.inp, type: "number", value: form.nailCostPerKg, onChange: e=>setForm(f=>({...f,nailCostPerKg:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1660}}))
+          )
+          , React.createElement('div', { style: {...S.box(P.blue+"44"),marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1662}}
+            , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:P.blue,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1663}}, "👷 عمالة" )
+            , React.createElement('div', { style: S.fg3, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1664}}
+              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1665}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1665}}, "عدد العمال" ), React.createElement('input', { style: S.inp, type: "number", value: form.workersPerDay, onChange: e=>setForm(f=>({...f,workersPerDay:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1665}}))
+              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1666}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1666}}, "أجر/يوم (ج)" ), React.createElement('input', { style: S.inp, type: "number", value: form.dailyWagePerWorker, onChange: e=>setForm(f=>({...f,dailyWagePerWorker:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1666}}))
+              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1667}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1667}}, "إنتاج/يوم (" , form.productName||"بالته", ")"), React.createElement('input', { style: S.inp, type: "number", value: form.dailyOutput, onChange: e=>setForm(f=>({...f,dailyOutput:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1667}}))
+            )
+          )
+          , React.createElement('div', { style: {...S.box(P.purple+"44"),marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1670}}
+            , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:P.purple,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1671}}, "⚡ كهرباء وتشغيل"  )
+            , React.createElement('div', { style: S.fg3, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1672}}
+              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1673}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1673}}, "كيلوواط/بالته"), React.createElement('input', { style: S.inp, type: "number", value: form.kwhPerPallet, onChange: e=>setForm(f=>({...f,kwhPerPallet:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1673}}))
+              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1674}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1674}}, "سعر الكيلوواط (ج)"  ), React.createElement('input', { style: S.inp, type: "number", value: form.kwhPrice, onChange: e=>setForm(f=>({...f,kwhPrice:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1674}}))
+              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1675}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1675}}, "تكاليف إضافية/بالته (ج)"  ), React.createElement('input', { style: S.inp, type: "number", value: form.overheadPerPallet, onChange: e=>setForm(f=>({...f,overheadPerPallet:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1675}}))
+            )
+          )
+          , React.createElement('div', { style: {...S.box(P.teal+"44"),marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1678}}
+            , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:P.teal,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1679}}, "🚚 تكلفة النقل"  )
+            , React.createElement('div', { style: {maxWidth:300}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1680}}
+              , React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1681}}, "تكلفة النقل / "   , form.productName||"بالته", " (ج)" )
+              , React.createElement('input', { style: S.inp, type: "number", value: form.transportPerPallet, onChange: e=>setForm(f=>({...f,transportPerPallet:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1682}})
+            )
+          )
+          , React.createElement('div', { style: {...S.box("#ff8c4244"),marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1685}}
+            , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:"#ff8c42",marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1686}}, "🔥 تكلفة التبخير"  )
+            , React.createElement('div', { style: {display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,alignItems:"end"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1687}}
+              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1688}}
+                , React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1689}}, "تكلفة التبخير / "   , form.productName||"بالته", " (ج)" )
+                , React.createElement('input', { style: S.inp, type: "number", value: form.fumigationPerPallet,
+                  onChange: e=>setForm(f=>({...f,fumigationPerPallet:e.target.value})), placeholder: "0", __self: this, __source: {fileName: _jsxFileName, lineNumber: 1690}})
+              )
+              , React.createElement('div', { style: {fontSize:11,color:"#ff8c42",paddingBottom:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1693}}, "🌿 مطلوب للتصدير حسب معيار ISPM-15"
+                     , React.createElement('br', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1694}}), "اتركه 0 لو غير مطلوب"
+
+              )
+            )
+          )
+          , React.createElement('div', { style: {...S.box(),marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1699}}
+            , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:P.accent,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1700}}, "🪵 قطع الخشب"  )
+            , form.pieces.map((p,i)=>(
+              React.createElement('div', { key: i, style: {display:"grid",gridTemplateColumns:"2fr 1fr 1fr 1fr 1fr auto",gap:8,marginBottom:8,alignItems:"end"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1702}}
+                , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1703}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1703}}, "الوصف"), React.createElement('input', { style: S.inp, value: p.label, onChange: e=>setP(i,"label",e.target.value), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1703}}))
+                , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1704}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1704}}, "طول"), React.createElement('input', { style: S.inp, type: "number", value: p.length, onChange: e=>setP(i,"length",e.target.value), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1704}}))
+                , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1705}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1705}}, "عرض"), React.createElement('input', { style: S.inp, type: "number", value: p.width, onChange: e=>setP(i,"width",e.target.value), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1705}}))
+                , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1706}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1706}}, "سُمك"), React.createElement('input', { style: S.inp, type: "number", value: p.thickness, onChange: e=>setP(i,"thickness",e.target.value), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1706}}))
+                , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1707}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1707}}, "عدد"), React.createElement('input', { style: S.inp, type: "number", value: p.count, onChange: e=>setP(i,"count",e.target.value), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1707}}))
+                , React.createElement('button', { style: {...S.btn("d"),alignSelf:"flex-end",padding:"8px 10px"}, onClick: ()=>remP(i), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1708}}, "🗑")
+              )
+            ))
+            , React.createElement('button', { style: {...S.btn(),fontSize:11,padding:"5px 12px",marginTop:4}, onClick: addP, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1711}}, "+ قطعة" )
+          )
+          , React.createElement('div', { style: {display:"flex",gap:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1713}}
+            , React.createElement('button', { style: S.btn("p"), onClick: save, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1714}}, "حفظ")
+            , React.createElement('button', { style: S.btn(), onClick: ()=>setSf(false), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1715}}, "إلغاء")
+          )
+        )
+      )
 
       /* ═══════════════════════════════════════════════════════
           حاسبة التكلفة والتسعير — خطوة بخطوة
@@ -1878,76 +1948,6 @@ function PalletTypesPage({ data, setData }) {
               )
             );
           })
-        )
-      )
-      , sf&&(
-        React.createElement('div', { style: S.card, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1650}}
-          , React.createElement('div', { style: S.cT, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1651}}, "إضافة منتج جديد"  )
-          , React.createElement('div', { style: {...S.fg2,marginBottom:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1652}}
-            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1653}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1653}}, "اسم المنتج (الوحدة) — مثال: بالته، صندوق، رف"       )
-              , React.createElement('input', { style: S.inp, value: form.productName, onChange: e=>setForm(f=>({...f,productName:e.target.value})), placeholder: "بالته", __self: this, __source: {fileName: _jsxFileName, lineNumber: 1654}})
-            )
-            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1656}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1656}}, "اسم النوع / المواصفة"   ), React.createElement('input', { style: S.inp, value: form.name, onChange: e=>setForm(f=>({...f,name:e.target.value})), placeholder: "يورو 120×80" , __self: this, __source: {fileName: _jsxFileName, lineNumber: 1656}}))
-            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1657}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1657}}, "نوع الخشب" ), React.createElement('input', { style: S.inp, value: form.woodType, onChange: e=>setForm(f=>({...f,woodType:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1657}}))
-            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1658}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1658}}, "سعر م³ (ج)"  ), React.createElement('input', { style: S.inp, type: "number", value: form.woodCostPerM3, onChange: e=>setForm(f=>({...f,woodCostPerM3:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1658}}))
-            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1659}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1659}}, "مسامير كجم/" , form.productName||"بالته"), React.createElement('input', { style: S.inp, type: "number", value: form.nailsKg, onChange: e=>setForm(f=>({...f,nailsKg:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1659}}))
-            , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1660}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1660}}, "سعر كجم مسامير"  ), React.createElement('input', { style: S.inp, type: "number", value: form.nailCostPerKg, onChange: e=>setForm(f=>({...f,nailCostPerKg:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1660}}))
-          )
-          , React.createElement('div', { style: {...S.box(P.blue+"44"),marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1662}}
-            , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:P.blue,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1663}}, "👷 عمالة" )
-            , React.createElement('div', { style: S.fg3, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1664}}
-              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1665}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1665}}, "عدد العمال" ), React.createElement('input', { style: S.inp, type: "number", value: form.workersPerDay, onChange: e=>setForm(f=>({...f,workersPerDay:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1665}}))
-              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1666}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1666}}, "أجر/يوم (ج)" ), React.createElement('input', { style: S.inp, type: "number", value: form.dailyWagePerWorker, onChange: e=>setForm(f=>({...f,dailyWagePerWorker:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1666}}))
-              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1667}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1667}}, "إنتاج/يوم (" , form.productName||"بالته", ")"), React.createElement('input', { style: S.inp, type: "number", value: form.dailyOutput, onChange: e=>setForm(f=>({...f,dailyOutput:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1667}}))
-            )
-          )
-          , React.createElement('div', { style: {...S.box(P.purple+"44"),marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1670}}
-            , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:P.purple,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1671}}, "⚡ كهرباء وتشغيل"  )
-            , React.createElement('div', { style: S.fg3, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1672}}
-              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1673}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1673}}, "كيلوواط/بالته"), React.createElement('input', { style: S.inp, type: "number", value: form.kwhPerPallet, onChange: e=>setForm(f=>({...f,kwhPerPallet:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1673}}))
-              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1674}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1674}}, "سعر الكيلوواط (ج)"  ), React.createElement('input', { style: S.inp, type: "number", value: form.kwhPrice, onChange: e=>setForm(f=>({...f,kwhPrice:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1674}}))
-              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1675}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1675}}, "تكاليف إضافية/بالته (ج)"  ), React.createElement('input', { style: S.inp, type: "number", value: form.overheadPerPallet, onChange: e=>setForm(f=>({...f,overheadPerPallet:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1675}}))
-            )
-          )
-          , React.createElement('div', { style: {...S.box(P.teal+"44"),marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1678}}
-            , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:P.teal,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1679}}, "🚚 تكلفة النقل"  )
-            , React.createElement('div', { style: {maxWidth:300}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1680}}
-              , React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1681}}, "تكلفة النقل / "   , form.productName||"بالته", " (ج)" )
-              , React.createElement('input', { style: S.inp, type: "number", value: form.transportPerPallet, onChange: e=>setForm(f=>({...f,transportPerPallet:e.target.value})), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1682}})
-            )
-          )
-          , React.createElement('div', { style: {...S.box("#ff8c4244"),marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1685}}
-            , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:"#ff8c42",marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1686}}, "🔥 تكلفة التبخير"  )
-            , React.createElement('div', { style: {display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,alignItems:"end"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1687}}
-              , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1688}}
-                , React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1689}}, "تكلفة التبخير / "   , form.productName||"بالته", " (ج)" )
-                , React.createElement('input', { style: S.inp, type: "number", value: form.fumigationPerPallet,
-                  onChange: e=>setForm(f=>({...f,fumigationPerPallet:e.target.value})), placeholder: "0", __self: this, __source: {fileName: _jsxFileName, lineNumber: 1690}})
-              )
-              , React.createElement('div', { style: {fontSize:11,color:"#ff8c42",paddingBottom:8}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1693}}, "🌿 مطلوب للتصدير حسب معيار ISPM-15"
-                     , React.createElement('br', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1694}}), "اتركه 0 لو غير مطلوب"
-
-              )
-            )
-          )
-          , React.createElement('div', { style: {...S.box(),marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1699}}
-            , React.createElement('div', { style: {fontSize:12,fontWeight:600,color:P.accent,marginBottom:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1700}}, "🪵 قطع الخشب"  )
-            , form.pieces.map((p,i)=>(
-              React.createElement('div', { key: i, style: {display:"grid",gridTemplateColumns:"2fr 1fr 1fr 1fr 1fr auto",gap:8,marginBottom:8,alignItems:"end"}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1702}}
-                , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1703}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1703}}, "الوصف"), React.createElement('input', { style: S.inp, value: p.label, onChange: e=>setP(i,"label",e.target.value), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1703}}))
-                , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1704}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1704}}, "طول"), React.createElement('input', { style: S.inp, type: "number", value: p.length, onChange: e=>setP(i,"length",e.target.value), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1704}}))
-                , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1705}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1705}}, "عرض"), React.createElement('input', { style: S.inp, type: "number", value: p.width, onChange: e=>setP(i,"width",e.target.value), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1705}}))
-                , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1706}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1706}}, "سُمك"), React.createElement('input', { style: S.inp, type: "number", value: p.thickness, onChange: e=>setP(i,"thickness",e.target.value), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1706}}))
-                , React.createElement('div', {__self: this, __source: {fileName: _jsxFileName, lineNumber: 1707}}, React.createElement('label', { style: S.lbl, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1707}}, "عدد"), React.createElement('input', { style: S.inp, type: "number", value: p.count, onChange: e=>setP(i,"count",e.target.value), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1707}}))
-                , React.createElement('button', { style: {...S.btn("d"),alignSelf:"flex-end",padding:"8px 10px"}, onClick: ()=>remP(i), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1708}}, "🗑")
-              )
-            ))
-            , React.createElement('button', { style: {...S.btn(),fontSize:11,padding:"5px 12px",marginTop:4}, onClick: addP, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1711}}, "+ قطعة" )
-          )
-          , React.createElement('div', { style: {display:"flex",gap:10}, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1713}}
-            , React.createElement('button', { style: S.btn("p"), onClick: save, __self: this, __source: {fileName: _jsxFileName, lineNumber: 1714}}, "حفظ")
-            , React.createElement('button', { style: S.btn(), onClick: ()=>setSf(false), __self: this, __source: {fileName: _jsxFileName, lineNumber: 1715}}, "إلغاء")
-          )
         )
       )
     )
