@@ -3964,12 +3964,9 @@ function AppWithAuth() {
   const [ready, setReady] = React.useState(false);
 
   React.useEffect(()=>{
-    if(sbUser && !ready){
-      sbLoad(setData).then(()=>setReady(true));
-    }
-  },[sbUser]);
+    sbLoad(setData).then(()=>setReady(true)).catch(()=>setReady(true));
+  },[]);
 
-  // Auto-save on data change
   const setDataAndSave = React.useCallback((updater) => {
     setData(prev => {
       const next = typeof updater === 'function' ? updater(prev) : updater;
