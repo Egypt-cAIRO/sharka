@@ -3947,9 +3947,13 @@ function setSbStatus(msg){ console.log('DB:', msg); }
 
 async function sbLoad(setData) {
   if(!sbUser) return;
-  const {data:row} = await sb.from('sharka_data').select('data').eq('user_id', sbUser).single();
-  if(row && row.data) {
-    setData({...initialData, ...row.data});
+  try {
+    const {data:row, error} = await sb.from('sharka_data').select('data').eq('user_id', sbUser).maybeSingle();
+    if(row && row.data) {
+      setData({...initialData, ...row.data});
+    }
+  } catch(e) {
+    console.log('Load error:', e);
   }
 }
 
